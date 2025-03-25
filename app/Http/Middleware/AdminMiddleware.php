@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminMiddleware
 {
@@ -15,6 +17,17 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (Auth::check()) {
+            # code...
+            if (Auth::user()->utype === 'ADM') {
+                # code...
+                return $next($request);
+            }else{
+                Session::flush();
+                return redirect()->route('login');
+            }
+        }
+        return redirect()->route('login'); 
+       // return $next($request);
     }
 }

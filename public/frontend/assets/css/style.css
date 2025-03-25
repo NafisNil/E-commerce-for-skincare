@@ -15539,3 +15539,8 @@ body.coming-soon-page {
     display: none; }
   .btn-video-player.playing svg.btn-pause {
     display: block; }
+
+    @media (min-width: 708px) {
+      .login{
+        margin-top: 120px; 
+      } }

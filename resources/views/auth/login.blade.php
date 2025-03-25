@@ -1,9 +1,14 @@
-@extends('layouts.app')
-
+@extends('frontend.layouts.master')
+@section('title')
+    Login  - Ziva
+    
+@endsection
 @section('content')
-<div class="container">
+
+<div class="container pt-6 mt-6 ">
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 login">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 

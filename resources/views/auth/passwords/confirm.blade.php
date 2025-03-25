@@ -1,9 +1,12 @@
-@extends('layouts.app')
-
+@extends('frontend.layouts.master')
+@section('title')
+    Confirm Password - Ziva
+    
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 login">
             <div class="card">
                 <div class="card-header">{{ __('Confirm Password') }}</div>
 
