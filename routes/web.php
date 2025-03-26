@@ -9,8 +9,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
-Route::get('/', [FrontendController::class, 'index'])->name('index');
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SkintypeController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ShopController;
 
+Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/shop-index', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop-product/{slug}', [ShopController::class, 'product_details'])->name('shop.details');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -25,5 +31,10 @@ Route::middleware(['auth','admin'])->group(function(){
         'brands' => BrandController::class,
         'category' => CategoryController::class,
         'subCategory' => SubCategoryController::class,
+        'products' => ProductController::class,
+        'skintype' => SkintypeController::class,
+        'blog' => BlogController::class
     ]);
+    Route::get('all-user',[AdminController::class, 'all_user'])->name('all_user');
+    Route::delete('user-delete/{user}', [AdminController::class, 'delete_user'])->name('user.destroy');
 });

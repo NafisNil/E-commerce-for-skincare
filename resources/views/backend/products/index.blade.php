@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Sub Category - Index
+    Products - Index
 @endsection
 @section('content')
   <!-- Include SweetAlert CSS and JS -->
@@ -10,12 +10,12 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6 offset-3">
-            <h1>Sub Category</h1>
+            <h1>Products</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-              <li class="breadcrumb-item active">Sub Category</li>
+              <li class="breadcrumb-item active">Products</li>
             </ol>
           </div>
         </div>
@@ -29,10 +29,10 @@
           <!-- left column -->
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Sub Category</h3>
+                <h3 class="card-title">Products</h3>
 
 
-                <a href="{{route('subCategory.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
+                <a href="{{route('products.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
 
 
 
@@ -45,34 +45,52 @@
                   <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Slug</th>
-                    <th>Category Name</th>
-                    <th>Photo</th>
-                    <th>Number of Products</th>
+                    <th>Category </th>
+                    <th>Sub Category</th>
+                    <th>Featured Image</th>
+                    <th>Regular Price </th>
+                    <th>Sales Price</th>
+                    <th>SKU </th>
+                    <th>Stock </th>
                     <th>Action</th>
 
                   </tr>
                   </thead>
                   <tbody>
 
-                    @foreach ($subCategory as $key=>$item)
+                    @foreach ($products as $key=>$item)
                     <tr>
                       <td>{{ ++$key }}</td>
                       <td>{{$item->name}}</td>
-                      <td>{{$item->slug}}</td>
-                      <td>{{$item->category->name}}</td>
+                      <td>{{@$item->category->name}}</td>
+                      <td>{{@$item->subCategory->name}}</td>
                       <td>
                         <img src="{{(!empty($item->logo))?URL::to('storage/'.$item->logo):URL::to('image/no_image.png')}}" alt="" style="max-height:80px; border-radius:10%;">
                       </td>
                       <td>
-                        <span class="badge bg-dark">0</span>
+                        <span class="badge bg-success">{{$item->sales_price}} Tk</span>
                       </td>
                       <td>
-                        <a href="{{route('subCategory.edit',[$item])}}" title="Edit">
+                        <span class="badge bg-info">{{$item->regular_price}} Tk</span>
+                      </td>
+                      <td>{{$item->SKU}}</td>
+                      <td>
+                        @if ($item->stock_status == 'instock')
+                          <span class="badge bg-success">In Stock</span>
+                            
+                        @else
+                          <span class="badge bg-danger">Out of Stock</span>
+                        @endif
+                      </td>
+                      <td>
+                        <a href="{{route('products.edit',[$item])}}" title="Edit">
                           <button class="btn btn-outline-info btn-sm"><i class="fas fa-pen-square"></i></button>
                         </a>
+                        <a href="{{route('products.show',[$item])}}" title="Show">
+                          <button class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></button>
+                        </a>
                         <button class="btn btn-outline-danger btn-sm" title="Delete" onclick="confirmDelete({{ $item->id }})"><i class="fas fa-trash"></i></button>
-                        <form id="delete-form-{{ $item->id }}" action="{{route('subCategory.destroy',[$item])}}" method="POST" style="display:none;">
+                        <form id="delete-form-{{ $item->id }}" action="{{route('products.destroy',[$item])}}" method="POST" style="display:none;">
                           @method('DELETE')
                           @csrf
                         </form>
@@ -86,11 +104,14 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Category Name</th>
-                    <th>Photo</th>
-                    <th>Number of Products</th>
+                    <<th>Name</th>
+                    <th>Category </th>
+                    <th>Sub Category</th>
+                    <th>Featured Image</th>
+                    <th>Regular Price </th>
+                    <th>Sales Price</th>
+                    <th>SKU </th>
+                    <th>Stock </th>
                 
                     <th>Action</th>
 

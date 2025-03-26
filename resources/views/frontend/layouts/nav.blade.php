@@ -48,7 +48,7 @@ class="header-mobile__navigation navigation d-flex flex-column w-100 position-ab
         <a href="index.html" class="navigation__link">Home</a>
       </li>
       <li class="navigation__item">
-        <a href="shop.html" class="navigation__link">Shop</a>
+        <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
       </li>
       <li class="navigation__item">
         <a href="cart.html" class="navigation__link">Cart</a>

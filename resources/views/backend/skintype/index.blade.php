@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Sub Category - Index
+    Skin Type - Index
 @endsection
 @section('content')
   <!-- Include SweetAlert CSS and JS -->
@@ -10,12 +10,12 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6 offset-3">
-            <h1>Sub Category</h1>
+            <h1>Skin Type</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-              <li class="breadcrumb-item active">Sub Category</li>
+              <li class="breadcrumb-item active">Skin Type</li>
             </ol>
           </div>
         </div>
@@ -29,10 +29,10 @@
           <!-- left column -->
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Sub Category</h3>
+                <h3 class="card-title">Skin Type</h3>
 
 
-                <a href="{{route('subCategory.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
+                <a href="{{route('skintype.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
 
 
 
@@ -46,7 +46,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Slug</th>
-                    <th>Category Name</th>
+                 
                     <th>Photo</th>
                     <th>Number of Products</th>
                     <th>Action</th>
@@ -55,12 +55,12 @@
                   </thead>
                   <tbody>
 
-                    @foreach ($subCategory as $key=>$item)
+                    @foreach ($skintype as $key=>$item)
                     <tr>
                       <td>{{ ++$key }}</td>
                       <td>{{$item->name}}</td>
                       <td>{{$item->slug}}</td>
-                      <td>{{$item->category->name}}</td>
+                    
                       <td>
                         <img src="{{(!empty($item->logo))?URL::to('storage/'.$item->logo):URL::to('image/no_image.png')}}" alt="" style="max-height:80px; border-radius:10%;">
                       </td>
@@ -68,11 +68,11 @@
                         <span class="badge bg-dark">0</span>
                       </td>
                       <td>
-                        <a href="{{route('subCategory.edit',[$item])}}" title="Edit">
+                        <a href="{{route('skintype.edit',[$item])}}" title="Edit">
                           <button class="btn btn-outline-info btn-sm"><i class="fas fa-pen-square"></i></button>
                         </a>
                         <button class="btn btn-outline-danger btn-sm" title="Delete" onclick="confirmDelete({{ $item->id }})"><i class="fas fa-trash"></i></button>
-                        <form id="delete-form-{{ $item->id }}" action="{{route('subCategory.destroy',[$item])}}" method="POST" style="display:none;">
+                        <form id="delete-form-{{ $item->id }}" action="{{route('skintype.destroy',[$item])}}" method="POST" style="display:none;">
                           @method('DELETE')
                           @csrf
                         </form>
@@ -88,7 +88,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Slug</th>
-                    <th>Category Name</th>
+                 
                     <th>Photo</th>
                     <th>Number of Products</th>
                 

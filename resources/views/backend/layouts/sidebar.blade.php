@@ -97,14 +97,39 @@
                 </a>
               </li>
 
-{{-- 
-             
               <li class="nav-item">
-                <a href="{{ route('client.index') }}" class="nav-link {{$route == 'client.index'?'active':''}}" >
+                <a href="{{ route('products.index') }}" class="nav-link {{$route == 'products.index'?'active':''}}" >
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Client </p>
+                  <p>Product </p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ route('skintype.index') }}" class="nav-link {{$route == 'skintype.index'?'active':''}}" >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Skin Type </p>
+                </a>
+              </li>
+
+              <hr>
+
+              <li class="nav-item">
+                <a href="{{ route('blog.index') }}" class="nav-link {{$route == 'blog.index'?'active':''}}" >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Blog about Skin Type </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('all_user') }}" class="nav-link {{$route == 'all_user'?'active':''}}" >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All User </p>
+                </a>
+              </li>
+
+{{-- 
+             
+              
               <li class="nav-item">
                 <a href="{{ route('service.index') }}" class="nav-link {{$route == 'service.index'?'active':''}}" >
                   <i class="far fa-circle nav-icon"></i>

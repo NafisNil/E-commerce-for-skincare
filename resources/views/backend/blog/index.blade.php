@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Sub Category - Index
+    Blog - Index
 @endsection
 @section('content')
   <!-- Include SweetAlert CSS and JS -->
@@ -10,12 +10,12 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6 offset-3">
-            <h1>Sub Category</h1>
+            <h1>Blog</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
-              <li class="breadcrumb-item active">Sub Category</li>
+              <li class="breadcrumb-item active">Blog</li>
             </ol>
           </div>
         </div>
@@ -29,10 +29,10 @@
           <!-- left column -->
              <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Sub Category</h3>
+                <h3 class="card-title">Blog</h3>
 
 
-                <a href="{{route('subCategory.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
+                <a href="{{route('blog.create')}}" class="float-right btn btn-outline-dark btn-sm mb-2"><i class="fas fa-plus-square"></i></a>
 
 
 
@@ -44,41 +44,58 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Category Name</th>
-                    <th>Photo</th>
-                    <th>Number of Products</th>
+                    <th>Skin Type</th>
+                    <th>Description</th>
+                 
+                   
+                
                     <th>Action</th>
 
                   </tr>
                   </thead>
                   <tbody>
 
-                    @foreach ($subCategory as $key=>$item)
+                    @foreach ($blog as $key=>$item)
                     <tr>
                       <td>{{ ++$key }}</td>
-                      <td>{{$item->name}}</td>
-                      <td>{{$item->slug}}</td>
-                      <td>{{$item->category->name}}</td>
+                      <td>{{$item->skintype->name}}</td>
                       <td>
-                        <img src="{{(!empty($item->logo))?URL::to('storage/'.$item->logo):URL::to('image/no_image.png')}}" alt="" style="max-height:80px; border-radius:10%;">
-                      </td>
+                        <a href="#" data-toggle="modal" data-target="#descriptionModal{{$key}}">
+                        {!! Str::substr($item->description, 0, 120) !!} ...
+                        </a></td>
+                    
+                     
+                    
                       <td>
-                        <span class="badge bg-dark">0</span>
-                      </td>
-                      <td>
-                        <a href="{{route('subCategory.edit',[$item])}}" title="Edit">
+                        <a href="{{route('blog.edit',[$item])}}" title="Edit">
                           <button class="btn btn-outline-info btn-sm"><i class="fas fa-pen-square"></i></button>
                         </a>
                         <button class="btn btn-outline-danger btn-sm" title="Delete" onclick="confirmDelete({{ $item->id }})"><i class="fas fa-trash"></i></button>
-                        <form id="delete-form-{{ $item->id }}" action="{{route('subCategory.destroy',[$item])}}" method="POST" style="display:none;">
+                        <form id="delete-form-{{ $item->id }}" action="{{route('blog.destroy',[$item])}}" method="POST" style="display:none;">
                           @method('DELETE')
                           @csrf
                         </form>
                       </td>
                     </tr>
-
+              <!-- Modal -->
+              <div class="modal fade" id="descriptionModal{{$key}}" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel{{$key}}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="descriptionModalLabel{{$key}}">Description</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      {!! $item->description !!}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
                     @endforeach
 
@@ -86,12 +103,10 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Category Name</th>
-                    <th>Photo</th>
-                    <th>Number of Products</th>
-                
+                    <th>Skin Type</th>
+                    <th>Description</th>
+                 
+
                     <th>Action</th>
 
                   </tr>

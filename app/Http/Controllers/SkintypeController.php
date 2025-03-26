@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Skintype;
 use Illuminate\Http\Request;
 use Image;
 use Illuminate\Support\Str;
-class CategoryController extends Controller
+class SkintypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $category = Category::orderBy('id', 'desc')->get();
-        return view('backend.category.index', compact('category'));
+        $skintype = Skintype::orderBy('id', 'desc')->get();
+        return view('backend.skintype.index', compact('skintype'));
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('backend.category.create');
+        return view('backend.skintype.create');
     }
 
     /**
@@ -38,24 +38,23 @@ class CategoryController extends Controller
             'logo' => 'required|image|max:2048',
         ]);
 
-        $category = Category::create([
+        $skintype = Skintype::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
 
         if ($request->hasFile('logo')) {
-            @unlink('storage/'.$category->logo);
-            $this->_uploadImage($request, $category);
+            @unlink('storage/'.$skintype->logo);
+            $this->_uploadImage($request, $skintype);
         }
 
-        return redirect()->route('category.index')->with('success', 'Category created successfully');
-
+        return redirect()->route('skintype.index')->with('success', 'skintype created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Skintype $skintype)
     {
         //
     }
@@ -63,44 +62,45 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Skintype $skintype)
     {
         //
-        return view('backend.category.edit',[
-            'edit' => $category
+        return view('backend.skintype.edit',[
+            'edit' => $skintype
         ]);
+  
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Skintype $skintype)
     {
         //
         $request->validate([
             'name' => 'required',
             'logo' => 'image|max:2048',
         ]);
-        $category->update($request->all());
+        $skintype->update($request->all());
         if ($request->hasFile('logo')) {
-            @unlink('storage/'.$category->logo);
-            $this->_uploadImage($request, $category);
+            @unlink('storage/'.$skintype->logo);
+            $this->_uploadImage($request, $skintype);
         }
 
-        return redirect()->route('category.index')->with('success','Data updated successfully');
+        return redirect()->route('skintype.index')->with('success','Data updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Skintype $skintype)
     {
         //
-        $category->delete();
+        $skintype->delete();
         if(!empty($event->logo));
-        @unlink('storage/'.$category->logo);
+        @unlink('storage/'.$skintype->logo);
 
-        return redirect()->route('category.index')->with('status','Data deleted successfully!');
+        return redirect()->route('skintype.index')->with('status','Data deleted successfully!');
     }
 
     private function _uploadImage($request, $about)

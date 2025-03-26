@@ -4,15 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Skintype extends Model
 {
     //
-    protected $fillable = [
-        'name',
-        'slug',
-        'logo',
-    ];
-
+    protected $guarded = [];
     public function products()
     {
         return $this->hasMany(Product::class);
